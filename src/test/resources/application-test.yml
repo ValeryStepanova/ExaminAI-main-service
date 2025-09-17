@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  liquibase:
+    enabled: false
+  cloud:
+    config:
+      enabled: false
+
+github:
+  app-id: 1254256
+  client-id: github-client-id
+  client-secret: github-client--secret
+  webhook-secret: github-webhook-secret
+  pem-path: /dev/null/fake.pem
+
+eureka:
+  client:
+    enabled: false

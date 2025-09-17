@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://db-main:5432/examinai-main
+    username: user
+    password: pass
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    enabled: false
+#    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties.hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      show_sql: true
+      format_sql: true
+#  ai:
+#    openai:
+#      audio:
+#        enabled: false
+#      transcription:
+#        enabled: false
+
+github:
+  app-id: ${GITHUB_APP_ID}
+  client-id: ${GITHUB_CLIENT_ID}
+  client-secret: ${GITHUB_CLIENT_SECRET}
+  webhook-secret: ${GITHUB_WEBHOOK_SECRET}
+  pem-path: ${GITHUB_PEM_PATH}
+
+eureka:
+  client:
+    enabled: ${EUREKA_CLIENT_ENABLED:false}
+    service-url:
+      defaultZone: ${EUREKA_URL}
