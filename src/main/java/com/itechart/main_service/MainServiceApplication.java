@@ -1,7 +1,6 @@
 package com.itechart.main_service;
 
 import com.itechart.main_service.config.GitHubConfig;
-import org.springframework.ai.model.openai.autoconfigure.OpenAiAudioSpeechAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

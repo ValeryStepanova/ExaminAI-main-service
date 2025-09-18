@@ -2,24 +2,31 @@ version: '3.8'
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: main-service
     ports:
       - "8089:8080"
     environment:
       SPRING_PROFILES_ACTIVE: docker
+
       SPRING_DATASOURCE_URL: jdbc:postgresql://db-main:5432/examinai-main
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: pass
+
       GITHUB_APP_ID: ${GITHUB_APP_ID}
-      GITHUB_CLIENT_ID:  ${GITHUB_CLIENT_ID}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID}
       GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET}
       GITHUB_WEBHOOK_SECRET: ${GITHUB_WEBHOOK_SECRET}
       GITHUB_PEM_PATH: ${GITHUB_PEM_PATH}
-      EUREKA_CLIENT_ENABLED: ${EUREKA_CLIENT_ENABLED:-false}
-      EUREKA_URL: ${EUREKA_URL:-http://service-discovery:8761/eureka}
+
+      EUREKA_CLIENT_ENABLED: ${EUREKA_CLIENT_ENABLED}
+      EUREKA_URL: ${EUREKA_URL}
+
     volumes:
-      - ./gitapp-examinai.2025-09-15.private-key.pem:/app/keys/github-app-key.pem
+      - ./gitapp-examinai.2025-09-15.private-key.pem:/app/keys/gitapp-examinai.2025-09-15.private-key.pem:ro
+
     depends_on:
       - db-main
 
