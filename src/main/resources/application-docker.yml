@@ -1,16 +1,23 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://db-main:5432/examinai-main
+    username: user
+    password: pass
     driver-class-name: org.postgresql.Driver
   liquibase:
     enabled: false
+#    driver-class-name: org.postgresql.Driver
   jpa:
     properties.hibernate:
       dialect: org.hibernate.dialect.PostgreSQLDialect
       show_sql: true
       format_sql: true
+#  ai:
+#    openai:
+#      audio:
+#        enabled: false
+#      transcription:
+#        enabled: false
 
 github:
   app-id: ${GITHUB_APP_ID}
@@ -21,12 +28,6 @@ github:
 
 eureka:
   client:
-    enabled: ${EUREKA_CLIENT_ENABLED}
+    enabled: ${EUREKA_CLIENT_ENABLED:false}
     service-url:
       defaultZone: ${EUREKA_URL}
-
-rsa:
-  private-key-path: ${GITHUB_PEM_PATH}
-
-server:
-  port: 8089
