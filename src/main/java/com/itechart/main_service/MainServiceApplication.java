@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
 @SpringBootApplication
 @EnableFeignClients(basePackages = "com.itechart.admin_service_api.api")
 @EnableConfigurationProperties(GitHubConfig.class)

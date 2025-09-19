@@ -4,18 +4,25 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMKeyPair;
 import org.bouncycastle.openssl.PEMParser;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 import org.springframework.stereotype.Service;
 
 import java.io.FileReader;
+import java.security.Security;
 import java.security.interfaces.RSAPrivateKey;
 import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
 public class GitHubJwtUtil {
+    static {
+        if (Security.getProvider("BC") == null) {
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
     private final GitHubConfig config;
     private final RsaKeyLoader rsaKeyProperties;
 
