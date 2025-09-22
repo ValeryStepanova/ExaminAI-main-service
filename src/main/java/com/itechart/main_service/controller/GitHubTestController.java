@@ -1,7 +1,7 @@
 package com.itechart.main_service.controller;
 
 import com.itechart.main_service.config.GitHubConfig;
-import com.itechart.main_service.config.GitHubJwtUtil;
+import com.itechart.main_service.service.GitHubJwtUtilService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class GitHubTestController {
 
-    private final GitHubJwtUtil jwtUtil;
+    private final GitHubJwtUtilService jwtUtil;
 
     @GetMapping("/generateToken")
     public ResponseEntity<String> generateToken(){

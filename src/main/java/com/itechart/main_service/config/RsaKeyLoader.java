@@ -5,7 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.interfaces.RSAPrivateKey;
 
-import static com.itechart.main_service.config.GitHubJwtUtil.loadPrivateKey;
+import static com.itechart.main_service.service.GitHubJwtUtilService.loadPrivateKey;
+
 
 @Service
 @RequiredArgsConstructor

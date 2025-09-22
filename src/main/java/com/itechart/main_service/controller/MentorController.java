@@ -8,13 +8,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController("api/v1/mentor-flow")
 @RequiredArgsConstructor
 public class MentorController {
     private final MentorService mentorService;
 
-    @PostMapping("/comment/{taskInternId}")
-    public ResponseEntity<TaskInternDto> commentPullRequest(@PathVariable Long taskInternId, String comment){
-        return ResponseEntity.ok(mentorService.commentPullRequest(taskInternId, comment));
+    @PostMapping("/comment/{taskInternId}/{internId}")
+    public ResponseEntity<TaskInternDto> commentPullRequest(@PathVariable Long taskInternId, @PathVariable UUID internId, String comment){
+        return ResponseEntity.ok(mentorService.commentPullRequest(taskInternId, internId, comment));
     }
 }

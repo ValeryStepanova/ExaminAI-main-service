@@ -1,5 +1,7 @@
-package com.itechart.main_service.config;
+package com.itechart.main_service.service;
 
+import com.itechart.main_service.config.GitHubConfig;
+import com.itechart.main_service.config.RsaKeyLoader;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +19,7 @@ import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
-public class GitHubJwtUtil {
+public class GitHubJwtUtilService {
     static {
         if (Security.getProvider("BC") == null) {
             Security.addProvider(new BouncyCastleProvider());
