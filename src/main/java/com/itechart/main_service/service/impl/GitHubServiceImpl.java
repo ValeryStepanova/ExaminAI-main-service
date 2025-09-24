@@ -1,6 +1,7 @@
 package com.itechart.main_service.service.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.itechart.main_service.config.RestTemplateConfig;
 import com.itechart.main_service.service.GitHubService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
@@ -16,7 +17,7 @@ import java.util.stream.StreamSupport;
 @Service
 @RequiredArgsConstructor
 public class GitHubServiceImpl implements GitHubService {
-    private final RestTemplate restTemplate;
+    private final RestTemplateConfig restTemplate;
     @Override
     public String getInstallationToken(String jwt, String owner) {
         HttpHeaders httpHeaders  = new HttpHeaders();
@@ -24,7 +25,7 @@ public class GitHubServiceImpl implements GitHubService {
         httpHeaders.setAccept(List.of(MediaType.APPLICATION_JSON));
 
         HttpEntity<Void> entity = new HttpEntity<>(httpHeaders);
-        ResponseEntity<JsonNode> response = restTemplate.exchange(
+        ResponseEntity<JsonNode> response = restTemplate.restTemplate().exchange(
                 "https://api.github.com/app/installations",
                 HttpMethod.GET,
                 entity,
@@ -41,7 +42,7 @@ public class GitHubServiceImpl implements GitHubService {
         String url = "https://api.github.com/app/installations/"
                 + installationId
                 + "/access_tokens";
-        ResponseEntity<JsonNode> resp = restTemplate.exchange(
+        ResponseEntity<JsonNode> resp = restTemplate.restTemplate().exchange(
                 url, HttpMethod.POST, entity, JsonNode.class
         );
         return resp.getBody().path("token").asText();
@@ -57,7 +58,7 @@ public class GitHubServiceImpl implements GitHubService {
         Map<String, String> payload = Map.of("body", comment);
         HttpEntity<Map<String, String>> entity = new HttpEntity<>(payload, headers);
 
-        restTemplate.postForEntity(
+        restTemplate.restTemplate().postForEntity(
                 "https://api.github.com/repos/%s/%s/issues/%d/comments".formatted(owner, repo, pr),
                 entity,
                 Void.class

@@ -5,5 +5,5 @@ import com.itechart.admin_service_api.dto.TaskInternDto;
 import java.util.UUID;
 
 public interface MentorService {
-    TaskInternDto commentPullRequest(Long taskInternId, UUID internId, String comment);
+    TaskInternDto commentPullRequest(Long taskInternId, String comment);
 }

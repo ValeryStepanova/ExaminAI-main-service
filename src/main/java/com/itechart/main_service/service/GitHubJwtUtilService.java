@@ -26,7 +26,6 @@ public class GitHubJwtUtilService {
         }
     }
     private final GitHubConfig config;
-    private final RsaKeyLoader rsaKeyProperties;
 
 
     public String generateJwt() {
@@ -38,7 +37,7 @@ public class GitHubJwtUtilService {
                 .setIssuer(String.valueOf(config.getAppId()))
                 .setIssuedAt(issuedAt)
                 .setExpiration(expiration)
-                .signWith(rsaKeyProperties.loadKey(), SignatureAlgorithm.RS256)
+                .signWith(loadPrivateKey(config.getPemPath()), SignatureAlgorithm.RS256)
                 .compact();
     }
 

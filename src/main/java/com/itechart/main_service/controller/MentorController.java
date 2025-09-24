@@ -15,8 +15,8 @@ import java.util.UUID;
 public class MentorController {
     private final MentorService mentorService;
 
-    @PostMapping("/comment/{taskInternId}/{internId}")
-    public ResponseEntity<TaskInternDto> commentPullRequest(@PathVariable Long taskInternId, @PathVariable UUID internId, String comment){
-        return ResponseEntity.ok(mentorService.commentPullRequest(taskInternId, internId, comment));
+    @PostMapping("/comment/{taskInternId}")
+    public ResponseEntity<TaskInternDto> commentPullRequest(@PathVariable Long taskInternId, String comment){
+        return ResponseEntity.ok(mentorService.commentPullRequest(taskInternId, comment));
     }
 }

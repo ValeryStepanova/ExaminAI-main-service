@@ -25,20 +25,20 @@ public class MentorServiceImpl implements MentorService {
     private final ParseLinkService parseLinkService;
 
     @Override
-    public TaskInternDto commentPullRequest(Long taskInternId, UUID internId, String comment) {
+    public TaskInternDto commentPullRequest(Long taskInternId, String comment) {
         // получить таск интерн, +
         // достать ссылку гитхаб, +
         // получить текущего ментора, +
         // проверить ли заассайнен он на текущую таску
         // оставить коммент
-        TaskInternDto taskInternDto = adminServiceClient.getTaskInternById(taskInternId, internId).getBody();
+        TaskInternDto taskInternDto = adminServiceClient.getTaskInternById(taskInternId).getBody();
         String githubLink = taskInternDto.getGithubLink();
         UserDto currentMentor = CurrentUserService.getCurrentUser();
         //TODO check if current mentor is assigned to task
         String jwt = gitHubJwtUtilService.generateJwt();
-        //TODO parse link to owner, repo, numOfPR
         Map<String, String> pr = parseLinkService.parseLink(githubLink);
-        String token = gitHubService.getInstallationToken(jwt, pr.get("owner"));//, pr.get("repo"), Integer.parseInt(pr.get("pr")));
+        String token = gitHubService.getInstallationToken(jwt, pr.get("owner"));
+        gitHubService.postComment(token, pr.get("owner"), comment, pr.get("repo"), Integer.parseInt(pr.get("pr")));
         return taskInternDto;
     }
 }
